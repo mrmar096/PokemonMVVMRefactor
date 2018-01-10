@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="net.azarquiel.pokemonappreal.vistas.MainActivity">
+    <item android:id="@+id/search"
+        android:title="titulo"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView" />
+    <item
+        android:id="@+id/action_fav"
+        android:orderInCategory="100"
+        android:title="@string/action_fav"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/star_off"/>
+</menu>
