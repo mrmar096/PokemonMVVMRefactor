@@ -7,13 +7,12 @@ import android.databinding.DataBindingUtil
 import android.support.v7.content.res.AppCompatResources
 import android.view.MenuItem
 import android.widget.SearchView
-import io.realm.Realm
 import io.realm.RealmResults
 import net.azarquiel.pokemonappreal.R
-import net.azarquiel.pokemonappreal.presentation.pokemonmain.adapter.CustomAdapterPokemon
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonRealm
 import net.azarquiel.pokemonappreal.databinding.ActivityMainBinding
 import net.azarquiel.pokemonappreal.presentation.common.view.activity.BaseActivitySearchable
+import net.azarquiel.pokemonappreal.presentation.pokemonmain.adapter.CustomAdapterPokemon
 import net.azarquiel.pokemonappreal.presentation.pokemonmain.viewmodel.PokemonMainViewmodel
 
 // ************* Filtro ************ , SearchView.OnQueryTextListener
@@ -26,7 +25,6 @@ class MainActivity : BaseActivitySearchable() {
 
         private val REQUEST_DETALLE=0
     }
-    private lateinit var realm: Realm
     private lateinit var pokemons: RealmResults<PokemonRealm>
     private lateinit var adapter: CustomAdapterPokemon
     private lateinit var favoritosSH: SharedPreferences
@@ -88,7 +86,7 @@ class MainActivity : BaseActivitySearchable() {
 
     override fun bindData(contentView: Int) {
         val binding : ActivityMainBinding = DataBindingUtil.setContentView(this,contentView)
-        binding.viewmodel = PokemonMainViewmodel()
+        binding.viewmodel = PokemonMainViewmodel(navigator)
     }
 
     private fun getFavoritos() {

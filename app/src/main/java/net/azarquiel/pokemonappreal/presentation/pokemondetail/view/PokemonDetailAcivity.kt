@@ -29,8 +29,6 @@ class PokemonDetailAcivity : BaseActivity() {
 
     override fun getContentView(): Int  = R.layout.activity_pokemon_detail
 
-    private lateinit var realm: Realm
-
     private lateinit var favoritosSH: SharedPreferences
 
     private var pokemon_id: Long = 0
@@ -95,7 +93,7 @@ class PokemonDetailAcivity : BaseActivity() {
     }
     override fun bindData(contentView: Int) {
         val binding : ActivityPokemonDetailBinding = DataBindingUtil.setContentView(this,contentView)
-        binding.viewmodel = PokemonDetailViewmodel()
+        binding.viewmodel = PokemonDetailViewmodel(navigator)
     }
 
     override fun onBackPressed() {
