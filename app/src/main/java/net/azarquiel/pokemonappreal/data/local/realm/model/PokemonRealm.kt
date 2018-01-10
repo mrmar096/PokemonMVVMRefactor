@@ -1,4 +1,4 @@
-package net.azarquiel.pokemonappreal.model
+package net.azarquiel.pokemonappreal.data.local.realm.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

@@ -1,4 +1,4 @@
-package net.azarquiel.pokemonappreal.vistas
+package net.azarquiel.pokemonappreal.presentation.pokemondetail.view
 
 import android.app.Activity
 import android.content.Context
@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -15,12 +14,17 @@ import net.azarquiel.pokemonappreal.R
 
 import kotlinx.android.synthetic.main.activity_pokemon_detail_acivity.*
 import kotlinx.android.synthetic.main.content_pokemon_detail_acivity.*
-import net.azarquiel.pokemonappreal.model.AbilityRealm
-import net.azarquiel.pokemonappreal.model.PokemonAbilitiesRealm
-import net.azarquiel.pokemonappreal.model.PokemonTypesRealm
-import net.azarquiel.pokemonappreal.model.TypeRealm
+import net.azarquiel.pokemonappreal.data.local.realm.model.AbilityRealm
+import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonAbilitiesRealm
+import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonTypesRealm
+import net.azarquiel.pokemonappreal.data.local.realm.model.TypeRealm
+import net.azarquiel.pokemonappreal.presentation.common.view.activity.BaseActivity
+import net.azarquiel.pokemonappreal.presentation.pokemonmain.view.MainActivity
 
-class PokemonDetailAcivity : AppCompatActivity() {
+class PokemonDetailAcivity : BaseActivity() {
+    override fun getContentView(): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private lateinit var realm: Realm
 
@@ -88,7 +92,7 @@ class PokemonDetailAcivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        setResult(Activity.RESULT_OK, Intent(this,MainActivity::class.java))
+        setResult(Activity.RESULT_OK, Intent(this, MainActivity::class.java))
         super.onBackPressed()
     }
 

@@ -1,4 +1,4 @@
-package net.azarquiel.pokemonappreal.adaptadores
+package net.azarquiel.pokemonappreal.presentation.pokemonmain.adapter
 
 import android.app.Activity
 import android.content.Context
@@ -12,10 +12,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import io.realm.Realm
 import kotlinx.android.synthetic.main.rowpokemon.view.*
-import net.azarquiel.pokemonappreal.model.PokemonRealm
-import net.azarquiel.pokemonappreal.model.PokemonTypesRealm
-import net.azarquiel.pokemonappreal.model.TypeRealm
-import net.azarquiel.pokemonappreal.vistas.PokemonDetailAcivity
+import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonRealm
+import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonTypesRealm
+import net.azarquiel.pokemonappreal.data.local.realm.model.TypeRealm
+import net.azarquiel.pokemonappreal.presentation.pokemondetail.view.PokemonDetailAcivity
 
 /**
  * Created by pacopulido on 02/11/17.
@@ -79,10 +79,10 @@ class CustomAdapterPokemon(val context: Context,
     }
 
     private fun onItemClick(dataItem: PokemonRealm) {
-        val intent = Intent(context as Activity,PokemonDetailAcivity::class.java)
+        val intent = Intent(context as Activity, PokemonDetailAcivity::class.java)
         intent.putExtra("pokemon_id", dataItem.pokemon_id)
         intent.putExtra("name", dataItem.name)
-        context.startActivityForResult(intent,REQUEST_DETALLE)
+        context.startActivityForResult(intent, REQUEST_DETALLE)
     }
 
 }

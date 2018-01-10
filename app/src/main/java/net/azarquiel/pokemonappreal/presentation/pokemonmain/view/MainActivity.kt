@@ -1,27 +1,25 @@
-package net.azarquiel.pokemonappreal.vistas
+package net.azarquiel.pokemonappreal.presentation.pokemonmain.view
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
-import android.widget.Toast
 import io.realm.Realm
 import io.realm.RealmResults
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import net.azarquiel.pokemonappreal.R
-import net.azarquiel.pokemonappreal.adaptadores.CustomAdapterPokemon
-import net.azarquiel.pokemonappreal.model.PokemonRealm
+import net.azarquiel.pokemonappreal.presentation.pokemonmain.adapter.CustomAdapterPokemon
+import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonRealm
+import net.azarquiel.pokemonappreal.presentation.common.view.activity.BaseActivitySearchable
 
 // ************* Filtro ************ , SearchView.OnQueryTextListener
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class MainActivity : BaseActivitySearchable() {
+
+    override fun getContentView(): Int = R.layout.activity_main
+
+    override fun getMenu(): Int  = R.menu.menu_main
+
     companion object {
         private val REQUEST_DETALLE=0
     }
@@ -36,43 +34,30 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     // ************* Filtro ************
     private var flagFavoritos = false
 
+    /* TODO CHANGE THIS
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
+            setSupportActionBar(toolbar)
+            // Get Data
+            favoritosSH = getSharedPreferences("favoritos", Context.MODE_PRIVATE)
+            realm = Realm.getDefaultInstance() // singleton
+            // datos de BD que no cambian a lo largo de la app
+            pokemons = realm.where(PokemonRealm::class.java).findAll()
+            // Instanciamos los datas
+            pokemonsAL = ArrayList<PokemonRealm>()
+            // ************* Filtro ************
+            original = ArrayList<PokemonRealm>()
+            // ************* / Filtro ************
+            // rv con adapter (datalist vacio, pero lo adapter para notifys posteriores)
+            rvpokemon.layoutManager = LinearLayoutManager(this)
+            adapter = CustomAdapterPokemon(this, R.layout.rowpokemon,pokemonsAL)
+            rvpokemon.adapter = adapter
+            // Inicialmente visualizamos los de la BDs
+            getDB()
+        }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-        // Get Data
-        favoritosSH = getSharedPreferences("favoritos", Context.MODE_PRIVATE)
-        realm = Realm.getDefaultInstance() // singleton
-        // datos de BD que no cambian a lo largo de la app
-        pokemons = realm.where(PokemonRealm::class.java).findAll()
-        // Instanciamos los datas
-        pokemonsAL = ArrayList<PokemonRealm>()
-        // ************* Filtro ************
-        original = ArrayList<PokemonRealm>()
-        // ************* / Filtro ************
-        // rv con adapter (datalist vacio, pero lo adapter para notifys posteriores)
-        rvpokemon.layoutManager = LinearLayoutManager(this)
-        adapter = CustomAdapterPokemon(this, R.layout.rowpokemon,pokemonsAL)
-        rvpokemon.adapter = adapter
-        // Inicialmente visualizamos los de la BDs
-        getDB()
-    }
-
-
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        // ************* Filtro ************
-        val searchItem = menu.findItem(R.id.search)
-        searchView = searchItem.actionView as SearchView
-        searchView.setQueryHint("Search...")
-        searchView.setOnQueryTextListener(this)
-        // ************* / Filtro ************
-        return true
-    }
-
+    */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_fav -> {
@@ -103,7 +88,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val favoritos = favoritosSH.all
         pokemonsAL.clear()
         for ((entry,value) in favoritos.entries){
-            pokemonsAL.add(PokemonRealm(entry.toLong(),value.toString()))
+            pokemonsAL.add(PokemonRealm(entry.toLong(), value.toString()))
         }
         refresh()
     }
@@ -128,6 +113,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     // ************* Filtro ************
+    /* TODO MOVE THIS
     override fun onQueryTextChange(query: String): Boolean {
         //Toast.makeText(this, newText, Toast.LENGTH_SHORT).show()
         val filteredList = ArrayList<PokemonRealm>()
@@ -158,13 +144,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         return false
     }
 
-    override fun onQueryTextSubmit(text: String): Boolean {
-        //Toast.makeText(this, "Searching for " + text, Toast.LENGTH_LONG).show()
-        return false
-    }
+
     // ************* / Filtro ************
     private fun tostada(msg:String){
         Toast.makeText(this,msg,Toast.LENGTH_LONG).show()
     }
-
+*/
 }
