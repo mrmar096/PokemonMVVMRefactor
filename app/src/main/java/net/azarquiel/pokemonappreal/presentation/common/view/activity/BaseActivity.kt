@@ -17,11 +17,14 @@ abstract class BaseActivity : AppCompatActivity(){
 
     @MenuRes protected open fun getMenu() : Int = -1
 
+    abstract fun bindData(contentView: Int)
+
     private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(getContentView())
         setSupportActionBar(toolbar)
+        bindData(getContentView())
         super.onCreate(savedInstanceState)
     }
 

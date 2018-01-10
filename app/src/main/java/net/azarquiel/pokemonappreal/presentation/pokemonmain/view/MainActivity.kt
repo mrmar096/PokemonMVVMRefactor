@@ -3,6 +3,7 @@ package net.azarquiel.pokemonappreal.presentation.pokemonmain.view
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.databinding.DataBindingUtil
 import android.support.v7.content.res.AppCompatResources
 import android.view.MenuItem
 import android.widget.SearchView
@@ -11,16 +12,18 @@ import io.realm.RealmResults
 import net.azarquiel.pokemonappreal.R
 import net.azarquiel.pokemonappreal.presentation.pokemonmain.adapter.CustomAdapterPokemon
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonRealm
+import net.azarquiel.pokemonappreal.databinding.ActivityMainBinding
 import net.azarquiel.pokemonappreal.presentation.common.view.activity.BaseActivitySearchable
+import net.azarquiel.pokemonappreal.presentation.pokemonmain.viewmodel.PokemonMainViewmodel
 
 // ************* Filtro ************ , SearchView.OnQueryTextListener
 class MainActivity : BaseActivitySearchable() {
-
     override fun getContentView(): Int = R.layout.activity_main
 
     override fun getMenu(): Int  = R.menu.menu_main
 
     companion object {
+
         private val REQUEST_DETALLE=0
     }
     private lateinit var realm: Realm
@@ -33,7 +36,6 @@ class MainActivity : BaseActivitySearchable() {
     private lateinit var original: ArrayList<PokemonRealm>
     // ************* Filtro ************
     private var flagFavoritos = false
-
     /* TODO CHANGE THIS
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -82,6 +84,11 @@ class MainActivity : BaseActivitySearchable() {
             pokemonsAL.add(pokemon)
         }
         refresh()
+    }
+
+    override fun bindData(contentView: Int) {
+        val binding : ActivityMainBinding = DataBindingUtil.setContentView(this,contentView)
+        binding.viewmodel = PokemonMainViewmodel()
     }
 
     private fun getFavoritos() {
