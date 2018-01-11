@@ -2,4 +2,6 @@
     <string name="app_name">PokemonAppReal</string>
     <string name="action_fav">Favoritos</string>
     <string name="title_activity_pokemon_detail_acivity">PokemonDetailAcivity</string>
+    <string name="types">Types:</string>
+    <string name="abilities">Abilities:</string>
 </resources>

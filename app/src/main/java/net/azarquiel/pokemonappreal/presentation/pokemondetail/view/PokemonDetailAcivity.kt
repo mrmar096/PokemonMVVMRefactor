@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -12,21 +13,23 @@ import android.widget.Toast
 import io.realm.Realm
 import net.azarquiel.pokemonappreal.R
 
-import kotlinx.android.synthetic.main.activity_pokemon_detail_acivity.*
-import kotlinx.android.synthetic.main.content_pokemon_detail_acivity.*
+import kotlinx.android.synthetic.main.activity_pokemon_detail.*
+import kotlinx.android.synthetic.main.content_pokemon_detail.*
 import net.azarquiel.pokemonappreal.data.local.realm.model.AbilityRealm
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonAbilitiesRealm
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonTypesRealm
 import net.azarquiel.pokemonappreal.data.local.realm.model.TypeRealm
+import net.azarquiel.pokemonappreal.data.local.realm.repository.local.PokemonRepositoryImpl
+import net.azarquiel.pokemonappreal.databinding.ActivityPokemonDetailBinding
+import net.azarquiel.pokemonappreal.domain.interactor.local.PokemonInteractorImpl
 import net.azarquiel.pokemonappreal.presentation.common.view.activity.BaseActivity
+import net.azarquiel.pokemonappreal.presentation.pokemondetail.viewmodel.PokemonDetailViewmodel
 import net.azarquiel.pokemonappreal.presentation.pokemonmain.view.MainActivity
 
 class PokemonDetailAcivity : BaseActivity() {
-    override fun getContentView(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    private lateinit var realm: Realm
+
+    override fun getContentView(): Int  = R.layout.activity_pokemon_detail
 
     private lateinit var favoritosSH: SharedPreferences
 
@@ -36,7 +39,7 @@ class PokemonDetailAcivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pokemon_detail_acivity)
+        setContentView(R.layout.activity_pokemon_detail)
         setSupportActionBar(toolbar)
         favoritosSH = getSharedPreferences("favoritos", Context.MODE_PRIVATE)
 
@@ -89,6 +92,13 @@ class PokemonDetailAcivity : BaseActivity() {
         fab.setOnClickListener {
             favorito()
         }
+    }
+    override fun bindData(contentView: Int) {
+        val binding : ActivityPokemonDetailBinding = DataBindingUtil.setContentView(this,contentView)
+        val viewmodel = PokemonDetailViewmodel(navigator, pokemonPrefs, PokemonInteractorImpl(PokemonRepositoryImpl(realm)))
+        binding.viewmodel = viewmodel
+        viewmodel.fillPokemonView(pokemon_id)
+
     }
 
     override fun onBackPressed() {
