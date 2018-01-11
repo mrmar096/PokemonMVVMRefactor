@@ -21,12 +21,12 @@
             android:layout_width="260dp"
             android:layout_height="260dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/p100" />
+            app:pokemonDrawableId="@{viewmodel.pokemon.id}" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{viewmodel.pokemonDetail.name}"
+            android:text="@{viewmodel.pokemon.name}"
             android:layout_below="@+id/ivpokemondetail"
             android:textSize="30sp"
             android:id="@+id/tvpokemondetail" />

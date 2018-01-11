@@ -19,7 +19,9 @@ import net.azarquiel.pokemonappreal.data.local.realm.model.AbilityRealm
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonAbilitiesRealm
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonTypesRealm
 import net.azarquiel.pokemonappreal.data.local.realm.model.TypeRealm
+import net.azarquiel.pokemonappreal.data.local.realm.repository.local.PokemonRepositoryImpl
 import net.azarquiel.pokemonappreal.databinding.ActivityPokemonDetailBinding
+import net.azarquiel.pokemonappreal.domain.interactor.local.PokemonInteractorImpl
 import net.azarquiel.pokemonappreal.presentation.common.view.activity.BaseActivity
 import net.azarquiel.pokemonappreal.presentation.pokemondetail.viewmodel.PokemonDetailViewmodel
 import net.azarquiel.pokemonappreal.presentation.pokemonmain.view.MainActivity
@@ -93,7 +95,10 @@ class PokemonDetailAcivity : BaseActivity() {
     }
     override fun bindData(contentView: Int) {
         val binding : ActivityPokemonDetailBinding = DataBindingUtil.setContentView(this,contentView)
-        binding.viewmodel = PokemonDetailViewmodel(navigator)
+        val viewmodel = PokemonDetailViewmodel(navigator, pokemonPrefs, PokemonInteractorImpl(PokemonRepositoryImpl(realm)))
+        binding.viewmodel = viewmodel
+        viewmodel.fillPokemonView(pokemon_id)
+
     }
 
     override fun onBackPressed() {
