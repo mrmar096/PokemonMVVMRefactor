@@ -10,5 +10,6 @@ interface PokemonRepository {
     fun searchTypesByIdPokemon(id:Long,callback:RepositoryCallback<MutableList<String>>)
     fun searchAbilitiesByIdPokemon(id:Long,callback:RepositoryCallback<MutableList<String>>)
     fun getPokemonById(id:Long,callback:RepositoryCallback<PokemonRealmModel>)
+    fun getAllPokemons(callback:RepositoryCallback<ArrayList<PokemonRealmModel>>)
 
 }

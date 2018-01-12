@@ -60,4 +60,20 @@ class PokemonInteractorImpl(val pokemonRepository: PokemonRepository) : PokemonI
 
         })
     }
+
+    override fun getAllPokemons(callback: InteractorCallback<ArrayList<PokemonModel>>) {
+        callback.before()
+        pokemonRepository.getAllPokemons(object : RepositoryCallback<ArrayList<PokemonRealmModel>> {
+            override fun success(data: ArrayList<PokemonRealmModel>?) {
+                data?.let {
+                    callback.success(data.mapTo(arrayListOf()){PokemonModel(it.id,it.name,it.abilities,it.types) })
+                }
+            }
+
+            override fun fail(t: Throwable) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
+    }
 }

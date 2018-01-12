@@ -66,4 +66,29 @@ class PokemonRepositoryImpl(val realm: Realm) : PokemonRepository {
                 PokemonRealmModel(id,pokemonRealm.name,pokemonAbilities,pokemonTypes)
         )
     }
+
+    override fun getAllPokemons(callback: RepositoryCallback<ArrayList<PokemonRealmModel>>) {
+        val pokemonRealm = realm.where(PokemonRealm::class.java).findAll()
+        var pokemonList= arrayListOf<PokemonRealmModel>()
+        if (pokemonRealm == null){
+            callback.fail(PokemonResultsException("Los resultados han devuelto null value"))
+            return
+        }
+        pokemonRealm.forEach {
+            val pokemon = PokemonRealmModel(it.pokemon_id,it.name)
+            realm.where(PokemonTypesRealm::class.java).equalTo("pokemon_id", it.pokemon_id).findAll().forEach {
+                val results=realm.where(TypeRealm::class.java).equalTo("type_id", it.type_id).findAll()
+                if (results == null){ callback.fail(PokemonResultsException("Los resultados han devuelto null value")); return}
+                pokemon.types.addAll(results.map { it.name })
+            }
+            realm.where(PokemonAbilitiesRealm::class.java).equalTo("pokemon_id", it.pokemon_id).findAll().forEach {
+                val results=realm.where(AbilityRealm::class.java).equalTo("ability_id", it.ability_id).findAll()
+                if (results == null){ callback.fail(PokemonResultsException("Los resultados han devuelto null value")); return}
+                pokemon.abilities.addAll(results.map { it.name })
+            }
+            pokemonList.add(pokemon)
+        }
+
+        callback.success(pokemonList)
+    }
 }
