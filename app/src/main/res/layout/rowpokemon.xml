@@ -1,49 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="10dp"
-    card_view:cardElevation="4dp"
-    card_view:cardUseCompatPadding="true">
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/ivpokemonrow"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/p103" />
-
-    <TextView
-        android:id="@+id/tvpokemonrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="2dp"
-        android:layout_marginStart="2dp"
-        android:textSize="24sp"
-        android:layout_toEndOf="@+id/ivpokemonrow"
-        android:layout_toRightOf="@+id/ivpokemonrow"
-        android:text="TextView" />
-
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="net.azarquiel.pokemonappreal.presentation.pokemonmain.view.MainActivity"
+    >
+    <data>
+        <variable
+            name="item"
+            type="net.azarquiel.pokemonappreal.presentation.common.model.PokemonModel"/>
+    </data>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvpokemonrow"
-        android:layout_alignStart="@+id/tvpokemonrow"
-        android:layout_below="@+id/tvpokemonrow"
-        android:layout_marginTop="15dp"
-        android:gravity="right"
-        android:orientation="horizontal"
-        android:id="@+id/lineartypes">
-    </LinearLayout>
-</RelativeLayout>
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true">
 
-</android.support.v7.widget.CardView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivpokemonrow"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                app:pokemonDrawableId="@{item.id}" />
+
+            <TextView
+                android:id="@+id/tvpokemonrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp"
+                android:textSize="24sp"
+                android:layout_toEndOf="@+id/ivpokemonrow"
+                android:layout_toRightOf="@+id/ivpokemonrow"
+                android:text="@{item.name}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvpokemonrow"
+                android:layout_alignStart="@+id/tvpokemonrow"
+                android:layout_below="@+id/tvpokemonrow"
+                android:layout_marginTop="15dp"
+                android:gravity="right"
+                app:addChildTextView="@{item.types}"
+                android:orientation="horizontal"
+                android:id="@+id/lineartypes">
+            </LinearLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>

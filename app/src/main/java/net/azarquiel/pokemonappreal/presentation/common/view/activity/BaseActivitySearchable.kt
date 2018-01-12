@@ -10,20 +10,11 @@ import net.azarquiel.pokemonappreal.R
 abstract class BaseActivitySearchable : BaseActivity(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        super.onCreateOptionsMenu(menu)
-
         val searchItem = menu.findItem(R.id.search)
         val searchView = searchItem.actionView as SearchView
         searchView.queryHint = "Search..."
         searchView.setOnQueryTextListener(this)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onQueryTextSubmit(p0: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onQueryTextChange(p0: String?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

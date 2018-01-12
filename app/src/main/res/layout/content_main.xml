@@ -14,6 +14,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main"
+    app:adapter="@{viewmodel.adapter}"
     android:id="@+id/rvpokemon">
 </android.support.v7.widget.RecyclerView>
 </layout>

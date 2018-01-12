@@ -10,4 +10,5 @@ interface PokemonInteractor {
     fun searchTypesByIdPokemon(id:Long,callback:InteractorCallback<MutableList<String>>)
     fun searchAbilitiesByIdPokemon(id:Long,callback:InteractorCallback<MutableList<String>>)
     fun getPokemonById(id:Long,callback:InteractorCallback<PokemonModel>)
+    fun getAllPokemons(callback:InteractorCallback<ArrayList<PokemonModel>>)
 }
