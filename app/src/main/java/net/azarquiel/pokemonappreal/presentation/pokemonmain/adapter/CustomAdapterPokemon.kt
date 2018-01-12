@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.rowpokemon.view.*
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonRealm
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonTypesRealm
 import net.azarquiel.pokemonappreal.data.local.realm.model.TypeRealm
-import net.azarquiel.pokemonappreal.presentation.pokemondetail.view.PokemonDetailAcivity
+import net.azarquiel.pokemonappreal.presentation.pokemondetail.view.PokemonDetailActivity
 
 /**
  * Created by pacopulido on 02/11/17.
@@ -79,7 +79,7 @@ class CustomAdapterPokemon(val context: Context,
     }
 
     private fun onItemClick(dataItem: PokemonRealm) {
-        val intent = Intent(context as Activity, PokemonDetailAcivity::class.java)
+        val intent = Intent(context as Activity, PokemonDetailActivity::class.java)
         intent.putExtra("pokemon_id", dataItem.pokemon_id)
         intent.putExtra("name", dataItem.name)
         context.startActivityForResult(intent, REQUEST_DETALLE)

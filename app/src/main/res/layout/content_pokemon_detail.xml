@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="net.azarquiel.pokemonappreal.presentation.pokemondetail.view.PokemonDetailAcivity">
+    tools:context="net.azarquiel.pokemonappreal.presentation.pokemondetail.view.PokemonDetailActivity">
     <data>
         <variable
             name="viewmodel"
@@ -46,6 +46,7 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
+            app:addChildTextView="@{viewmodel.pokemon.types}"
             android:id="@+id/lhtypesdetail">
         </LinearLayout>
         <TextView
@@ -64,6 +65,7 @@
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:orientation="horizontal"
+            app:addChildTextView="@{viewmodel.pokemon.abilities}"
             android:id="@+id/lhabilitiesdetail"/>
     </RelativeLayout>
 </layout>

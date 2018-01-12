@@ -7,5 +7,5 @@ interface PokemonPreferences {
 
     fun isFavourite(id:Long): Boolean
     fun getAllFavourites(): MutableMap<Long,String>
-    fun saveFavourite(id: Long, name: String)
+    fun updateFavourite(isFavourite:Boolean,id: Long, name: String)
 }
