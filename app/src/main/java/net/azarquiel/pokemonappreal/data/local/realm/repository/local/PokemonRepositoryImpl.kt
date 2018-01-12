@@ -47,16 +47,20 @@ class PokemonRepositoryImpl(val realm: Realm) : PokemonRepository {
         val pokemonRealm = realm.where(PokemonRealm::class.java).equalTo("pokemon_id", id).findFirst()
         var pokemonTypes = mutableListOf<String>()
         var pokemonAbilities = mutableListOf<String>()
-        if (pokemonRealm == null) callback.fail(PokemonResultsException("Los resultados han devuelto null value"))
+        if (pokemonRealm == null){
+            callback.fail(PokemonResultsException("Los resultados han devuelto null value"))
+            return
+        }
+
         realm.where(PokemonTypesRealm::class.java).equalTo("pokemon_id", id).findAll().forEach {
             val results=realm.where(TypeRealm::class.java).equalTo("type_id", it.type_id).findAll()
-            if (results == null) callback.fail(PokemonResultsException("Los resultados han devuelto null value"))
-            pokemonTypes = results.map { it.name }.toMutableList()
+            if (results == null){ callback.fail(PokemonResultsException("Los resultados han devuelto null value")); return}
+            pokemonTypes.addAll(results.map { it.name })
         }
         realm.where(PokemonAbilitiesRealm::class.java).equalTo("pokemon_id", id).findAll().forEach {
             val results=realm.where(AbilityRealm::class.java).equalTo("ability_id", it.ability_id).findAll()
-            if (results == null) callback.fail(PokemonResultsException("Los resultados han devuelto null value"))
-            pokemonAbilities = results.map { it.name }.toMutableList()
+            if (results == null){ callback.fail(PokemonResultsException("Los resultados han devuelto null value")); return}
+            pokemonAbilities.addAll(results.map { it.name })
         }
         callback.success(
                 PokemonRealmModel(id,pokemonRealm.name,pokemonAbilities,pokemonTypes)

@@ -4,10 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.databinding.DataBindingUtil
+import android.os.Bundle
 import android.support.v7.content.res.AppCompatResources
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.widget.SearchView
+import io.realm.Realm
 import io.realm.RealmResults
+import kotlinx.android.synthetic.main.content_main.*
 import net.azarquiel.pokemonappreal.R
 import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonRealm
 import net.azarquiel.pokemonappreal.databinding.ActivityMainBinding
@@ -34,30 +38,26 @@ class MainActivity : BaseActivitySearchable() {
     private lateinit var original: ArrayList<PokemonRealm>
     // ************* Filtro ************
     private var flagFavoritos = false
-    /* TODO CHANGE THIS
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_main)
-            setSupportActionBar(toolbar)
-            // Get Data
-            favoritosSH = getSharedPreferences("favoritos", Context.MODE_PRIVATE)
-            realm = Realm.getDefaultInstance() // singleton
-            // datos de BD que no cambian a lo largo de la app
-            pokemons = realm.where(PokemonRealm::class.java).findAll()
-            // Instanciamos los datas
-            pokemonsAL = ArrayList<PokemonRealm>()
-            // ************* Filtro ************
-            original = ArrayList<PokemonRealm>()
-            // ************* / Filtro ************
-            // rv con adapter (datalist vacio, pero lo adapter para notifys posteriores)
-            rvpokemon.layoutManager = LinearLayoutManager(this)
-            adapter = CustomAdapterPokemon(this, R.layout.rowpokemon,pokemonsAL)
-            rvpokemon.adapter = adapter
-            // Inicialmente visualizamos los de la BDs
-            getDB()
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    */
+        // Get Data
+        realm = Realm.getDefaultInstance() // singleton
+        // datos de BD que no cambian a lo largo de la app
+        pokemons = realm.where(PokemonRealm::class.java).findAll()
+        // Instanciamos los datas
+        pokemonsAL = ArrayList<PokemonRealm>()
+        // ************* Filtro ************
+        original = ArrayList<PokemonRealm>()
+        // ************* / Filtro ************
+        // rv con adapter (datalist vacio, pero lo adapter para notifys posteriores)
+        rvpokemon.layoutManager = LinearLayoutManager(this)
+        adapter = CustomAdapterPokemon(this, R.layout.rowpokemon,pokemonsAL)
+        rvpokemon.adapter = adapter
+        // Inicialmente visualizamos los de la BDs
+        getDB()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_fav -> {

@@ -12,6 +12,7 @@ import net.azarquiel.pokemonappreal.presentation.common.model.PokemonModel
 /**
  * Created by mrmar on 10/1/18.
  */
+
 class PokemonDetailViewmodel(val navigator:Navigator,
                              val pokemonPreferences: PokemonPreferences,
                              val pokemonInteractor: PokemonInteractor):BaseObservable(){
@@ -23,7 +24,8 @@ class PokemonDetailViewmodel(val navigator:Navigator,
 
 
     fun markAsFavourite(){
-        pokemonPreferences.saveFavourite(pokemon.get().id,pokemon.get().name)
+        isFavourite.set(!isFavourite.get())
+        pokemonPreferences.updateFavourite(isFavourite.get(),pokemon.get().id,pokemon.get().name)
     }
 
     fun fillPokemonView(id:Long){

@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.pokemondetail.view.PokemonDetailAcivity"
+            android:name=".presentation.pokemondetail.view.PokemonDetailActivity"
             android:label="@string/title_activity_pokemon_detail_acivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

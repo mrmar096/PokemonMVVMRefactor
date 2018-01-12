@@ -26,7 +26,10 @@ class PokemonPreferencesImpl(val context: Context): PokemonPreferences {
     override fun getAllFavourites(): MutableMap<Long,String> =
             sharedPreferences.all.mapKeys { it.key.toLong()  }.mapValues { it.value.toString() }.toMutableMap()
 
-    override fun saveFavourite(id: Long,name:String) {
+    override fun updateFavourite(isFavourite:Boolean,id: Long, name:String) {
+        if (isFavourite)
             sharedPreferences.edit().putString(id.toString(),name).apply()
+        else
+            sharedPreferences.edit().remove(id.toString()).apply()
     }
 }
