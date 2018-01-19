@@ -8,6 +8,7 @@
         <variable
             name="item"
             type="net.azarquiel.pokemonappreal.presentation.common.model.PokemonModel"/>
+        <import type="net.azarquiel.pokemonappreal.infraestructure.utils.PokemonFormatter"/>
     </data>
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -50,7 +51,7 @@
                 android:layout_below="@+id/tvpokemonrow"
                 android:layout_marginTop="15dp"
                 android:gravity="right"
-                app:addChildTextView="@{item.types}"
+                app:addChildTextView="@{PokemonFormatter.formatPokemonTypes(item.types)}"
                 android:orientation="horizontal"
                 android:id="@+id/lineartypes">
             </LinearLayout>

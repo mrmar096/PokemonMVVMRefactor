@@ -5,6 +5,7 @@ import net.azarquiel.pokemonappreal.domain.interactor.InteractorCallback
 import net.azarquiel.pokemonappreal.domain.repository.RepositoryCallback
 import net.azarquiel.pokemonappreal.domain.repository.local.PokemonRepository
 import net.azarquiel.pokemonappreal.presentation.common.model.PokemonModel
+import net.azarquiel.pokemonappreal.presentation.common.model.PokemonTypes
 
 /**
  * Created by mrmar on 11/1/18.
@@ -49,7 +50,7 @@ class PokemonInteractorImpl(val pokemonRepository: PokemonRepository) : PokemonI
             override fun success(data: PokemonRealmModel?) {
                 var pokemon : PokemonModel? = null
                 data?.let {
-                    pokemon = PokemonModel(it.id,it.name,it.abilities,it.types)
+                    pokemon = PokemonModel(it.id,it.name,it.abilities,mapTypes(it.types))
                 }
                 callback.success(pokemon)
             }
@@ -61,12 +62,23 @@ class PokemonInteractorImpl(val pokemonRepository: PokemonRepository) : PokemonI
         })
     }
 
+    private fun mapTypes(types: MutableList<String>): MutableList<PokemonTypes> {
+        val list = mutableListOf<PokemonTypes>()
+        types.forEach {
+            nameType ->
+            list.add(
+                    PokemonTypes.values().first { it.name.toLowerCase() == nameType.toLowerCase() }
+            )
+        }
+        return list
+    }
+
     override fun getAllPokemons(callback: InteractorCallback<ArrayList<PokemonModel>>) {
         callback.before()
         pokemonRepository.getAllPokemons(object : RepositoryCallback<ArrayList<PokemonRealmModel>> {
             override fun success(data: ArrayList<PokemonRealmModel>?) {
                 data?.let {
-                    callback.success(data.mapTo(arrayListOf()){PokemonModel(it.id,it.name,it.abilities,it.types) })
+                    callback.success(data.mapTo(arrayListOf()){PokemonModel(it.id,it.name,it.abilities,mapTypes(it.types)) })
                 }
             }
 

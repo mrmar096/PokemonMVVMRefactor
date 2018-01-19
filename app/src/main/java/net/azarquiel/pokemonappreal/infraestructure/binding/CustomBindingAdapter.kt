@@ -4,9 +4,8 @@ import android.databinding.BindingAdapter
 import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import android.widget.LinearLayout.VERTICAL
 import net.azarquiel.pokemonappreal.presentation.pokemonmain.adapter.CustomAdapterPokemon
 
 /**
@@ -17,9 +16,18 @@ object CustomBindingAdapter {
     @JvmStatic
     @BindingAdapter("adapter")
     fun setAdapter(recyclerView: RecyclerView, adapter:CustomAdapterPokemon) {
-        val mLayoutManager = LinearLayoutManager(recyclerView.context)
+        val mLayoutManager = LinearLayoutManager(recyclerView.context,VERTICAL,false)
         recyclerView.layoutManager = mLayoutManager
         recyclerView.adapter = adapter
+    }
+    @JvmStatic
+    @BindingAdapter("checked")
+    fun setChecked(radioGroup: RadioGroup?, checkedIndex:Int):Int{
+        if(checkedIndex==-1){
+            return -1
+        }
+        (radioGroup?.getChildAt(checkedIndex) as RadioButton).isChecked = true
+        return checkedIndex
     }
 
     @JvmStatic

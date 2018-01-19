@@ -4,4 +4,7 @@
     <string name="title_activity_pokemon_detail_acivity">PokemonDetailAcivity</string>
     <string name="types">Types:</string>
     <string name="abilities">Abilities:</string>
+    <string name="type_flying">Volador</string>
+    <string name="type_fire">Fuego</string>
+    <string name="all">Todos</string>
 </resources>

@@ -1,17 +1,14 @@
 package net.azarquiel.pokemonappreal.presentation.pokemonmain.adapter
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import net.azarquiel.pokemonappreal.data.local.realm.model.PokemonRealm
 import net.azarquiel.pokemonappreal.databinding.RowpokemonBinding
 import net.azarquiel.pokemonappreal.presentation.common.model.PokemonModel
-import net.azarquiel.pokemonappreal.presentation.pokemondetail.view.PokemonDetailActivity
+import net.azarquiel.pokemonappreal.presentation.common.model.PokemonTypes
 
 
 /**
@@ -25,6 +22,7 @@ class CustomAdapterPokemon(val context: Context,
 
 
     private var tempItems = java.util.ArrayList(dataList)
+    private lateinit var originalData : List<PokemonModel>
     private var suggestions: MutableList<PokemonModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -88,13 +86,32 @@ class CustomAdapterPokemon(val context: Context,
         }
 
     }
+
     fun set(items:ArrayList<PokemonModel>){
+        this.originalData = items
+        updateList(items)
+    }
+
+    fun filterTypes(typePokemon: PokemonTypes) {
+        val tempData = this.originalData
+        updateList(tempData.filter {it.types.contains(typePokemon)}.toCollection(arrayListOf()))
+    }
+
+    private fun updateList(list: List<PokemonModel>) {
         this.dataList.clear()
-        this.dataList.addAll(items)
+        this.dataList.addAll(list)
         this.tempItems = ArrayList(dataList)
         notifyDataSetChanged()
     }
 
+
+    fun refresh(){
+        updateList(originalData)
+    }
+
+    fun filterByIds(list: ArrayList<Long>) {
+        set(this.dataList.filter { list.contains(it.id) }.toCollection(arrayListOf()))
+    }
 
 
 }

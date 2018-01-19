@@ -7,5 +7,5 @@ data class PokemonModel(
         var id : Long = -1L,
         var name: String = "",
         var abilities: MutableList<String> = mutableListOf(),
-        var types: MutableList<String> = mutableListOf()
+        var types: MutableList<PokemonTypes> = mutableListOf()
 )

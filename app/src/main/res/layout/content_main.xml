@@ -2,19 +2,70 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="net.azarquiel.pokemonappreal.presentation.pokemonmain.view.MainActivity"
-    >
+    tools:context="net.azarquiel.pokemonappreal.presentation.pokemonmain.view.MainActivity">
+
     <data>
+
         <variable
             name="viewmodel"
-            type="net.azarquiel.pokemonappreal.presentation.pokemonmain.viewmodel.PokemonMainViewmodel"/>
+            type="net.azarquiel.pokemonappreal.presentation.pokemonmain.viewmodel.PokemonMainViewmodel" />
     </data>
-<android.support.v7.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main"
-    app:adapter="@{viewmodel.adapter}"
-    android:id="@+id/rvpokemon">
-</android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:paddingTop="?actionBarSize"
+            app:adapter="@{viewmodel.adapter}" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="6dp">
+
+            <RadioGroup
+                android:id="@+id/radio_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onCheckedChanged="@{viewmodel.onOptionChange}"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:gravity="center"
+                app:checked="@{viewmodel.typeSelected}">
+
+                <RadioButton
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/type_flying" />
+
+                <RadioButton
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/type_fire" />
+                <RadioButton
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/all" />
+            </RadioGroup>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
 </layout>
